@@ -3,27 +3,31 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		011C600F2478F531005949E6 /* Extended.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011C600E2478F531005949E6 /* Extended.swift */; };
 		01F186892478941100C4F644 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F186882478941100C4F644 /* AppDelegate.swift */; };
-		01F1868B2478941100C4F644 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F1868A2478941100C4F644 /* SceneDelegate.swift */; };
 		01F1868D2478941100C4F644 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F1868C2478941100C4F644 /* ViewController.swift */; };
 		01F186902478941100C4F644 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01F1868E2478941100C4F644 /* Main.storyboard */; };
 		01F186922478941300C4F644 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01F186912478941300C4F644 /* Assets.xcassets */; };
 		01F186952478941300C4F644 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01F186932478941300C4F644 /* LaunchScreen.storyboard */; };
+		49C891667F64AA438F30674E /* Pods_BackpacDevelopmentTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC5829A80054FBACD76D854 /* Pods_BackpacDevelopmentTask.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		011C600E2478F531005949E6 /* Extended.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extended.swift; sourceTree = "<group>"; };
 		01F186852478941100C4F644 /* BackpacDevelopmentTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BackpacDevelopmentTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01F186882478941100C4F644 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		01F1868A2478941100C4F644 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		01F1868C2478941100C4F644 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		01F1868F2478941100C4F644 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		01F186912478941300C4F644 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01F186942478941300C4F644 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		01F186962478941300C4F644 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		816E4E06BACC8172B2C13547 /* Pods-BackpacDevelopmentTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BackpacDevelopmentTask.release.xcconfig"; path = "Target Support Files/Pods-BackpacDevelopmentTask/Pods-BackpacDevelopmentTask.release.xcconfig"; sourceTree = "<group>"; };
+		CEC5829A80054FBACD76D854 /* Pods_BackpacDevelopmentTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BackpacDevelopmentTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB9D7869C5C78759D392D049 /* Pods-BackpacDevelopmentTask.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BackpacDevelopmentTask.debug.xcconfig"; path = "Target Support Files/Pods-BackpacDevelopmentTask/Pods-BackpacDevelopmentTask.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49C891667F64AA438F30674E /* Pods_BackpacDevelopmentTask.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +47,8 @@
 			children = (
 				01F186872478941100C4F644 /* BackpacDevelopmentTask */,
 				01F186862478941100C4F644 /* Products */,
+				A4142E0785BE8338F6AB0273 /* Pods */,
+				A91FDDCA6BBA383C353E968F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,14 +64,31 @@
 			isa = PBXGroup;
 			children = (
 				01F186882478941100C4F644 /* AppDelegate.swift */,
-				01F1868A2478941100C4F644 /* SceneDelegate.swift */,
 				01F1868C2478941100C4F644 /* ViewController.swift */,
+				011C600E2478F531005949E6 /* Extended.swift */,
 				01F1868E2478941100C4F644 /* Main.storyboard */,
 				01F186912478941300C4F644 /* Assets.xcassets */,
 				01F186932478941300C4F644 /* LaunchScreen.storyboard */,
 				01F186962478941300C4F644 /* Info.plist */,
 			);
 			path = BackpacDevelopmentTask;
+			sourceTree = "<group>";
+		};
+		A4142E0785BE8338F6AB0273 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DB9D7869C5C78759D392D049 /* Pods-BackpacDevelopmentTask.debug.xcconfig */,
+				816E4E06BACC8172B2C13547 /* Pods-BackpacDevelopmentTask.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		A91FDDCA6BBA383C353E968F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CEC5829A80054FBACD76D854 /* Pods_BackpacDevelopmentTask.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +98,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 01F186992478941300C4F644 /* Build configuration list for PBXNativeTarget "BackpacDevelopmentTask" */;
 			buildPhases = (
+				DA6C54E49BA95BEFC247F2C1 /* [CP] Check Pods Manifest.lock */,
 				01F186812478941100C4F644 /* Sources */,
 				01F186822478941100C4F644 /* Frameworks */,
 				01F186832478941100C4F644 /* Resources */,
+				32F4C6867C9460EF589A9A79 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -133,14 +159,56 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		32F4C6867C9460EF589A9A79 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BackpacDevelopmentTask/Pods-BackpacDevelopmentTask-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BackpacDevelopmentTask/Pods-BackpacDevelopmentTask-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BackpacDevelopmentTask/Pods-BackpacDevelopmentTask-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DA6C54E49BA95BEFC247F2C1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BackpacDevelopmentTask-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		01F186812478941100C4F644 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				01F1868D2478941100C4F644 /* ViewController.swift in Sources */,
+				011C600F2478F531005949E6 /* Extended.swift in Sources */,
 				01F186892478941100C4F644 /* AppDelegate.swift in Sources */,
-				01F1868B2478941100C4F644 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +284,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -270,7 +338,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -282,6 +350,7 @@
 		};
 		01F1869A2478941300C4F644 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DB9D7869C5C78759D392D049 /* Pods-BackpacDevelopmentTask.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -294,12 +363,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ywangnon.BackpacDevelopmentTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		01F1869B2478941300C4F644 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 816E4E06BACC8172B2C13547 /* Pods-BackpacDevelopmentTask.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -312,7 +382,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ywangnon.BackpacDevelopmentTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
