@@ -15,6 +15,7 @@ class MainViewController: UIViewController {
     
     var mainTableView: UITableView = {
         let tableView = UITableView()
+        tableView.bounces = false
         tableView.register(MainTableViewCell.self, forCellReuseIdentifier: "mainCell")
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
@@ -31,6 +32,7 @@ class MainViewController: UIViewController {
         self.setDelegates()
         self.setAddTargets()
         self.setGestures()
+        self.setOtherProperties()
     }
     
     func setViewFoundations() {
@@ -38,7 +40,6 @@ class MainViewController: UIViewController {
         label.text = "핸드메이드"
         label.font = .systemFont(ofSize: 20, weight: .bold)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
-        
     }
     
     func setAddSubViews() {
@@ -75,6 +76,10 @@ class MainViewController: UIViewController {
     
     func setGestures() {
         
+    }
+    
+    func setOtherProperties() {
+        self.mainTableView.separatorStyle = .none
     }
 }
 
@@ -116,7 +121,13 @@ extension MainViewController {
 
 // MARK: -
 extension MainViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return self.view.frame.width * 1.3
+    }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("touch")
+    }
 }
 
 extension MainViewController: UITableViewDataSource {
@@ -126,9 +137,12 @@ extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let mainCell = tableView.dequeueReusableCell(withIdentifier: "mainCell", for: indexPath) as! MainTableViewCell
-        mainCell.titleLabel.text = self.searchedData?.results![indexPath.row].trackName!
+        mainCell.titleImageView.image = CommonFunctions.shared.getImageByURL(urlString: self.searchedData?.results![indexPath.row].artworkUrl512)
+        mainCell.appNameLabel.text = self.searchedData?.results![indexPath.row].trackName
+        mainCell.sellerNameLabel.text = self.searchedData?.results![indexPath.row].sellerName
+        mainCell.genrelabel.text = self.searchedData?.results![indexPath.row].primaryGenreName
+        mainCell.priceLabel.text = self.searchedData?.results![indexPath.row].formattedPrice
+        mainCell.ratingView.rating = self.searchedData?.results![indexPath.row].averageUserRating as! Double
         return mainCell
     }
-    
-    
 }
