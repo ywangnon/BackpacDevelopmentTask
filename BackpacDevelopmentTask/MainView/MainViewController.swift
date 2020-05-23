@@ -7,14 +7,128 @@
 //
 
 import UIKit
+import Alamofire
 
 class MainViewController: UIViewController {
-
+    let searchedWord: String = "핸드메이드"
+    var searchedData: ItunesAppInfo?
+    
+    var mainTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(MainTableViewCell.self, forCellReuseIdentifier: "mainCell")
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        self.getData()
+        self.setViewFoundations()
+        self.setAddSubViews()
+        self.setLayouts()
+        self.setDelegates()
+        self.setAddTargets()
+        self.setGestures()
     }
-
-
+    
+    func setViewFoundations() {
+        let label = UILabel()
+        label.text = "핸드메이드"
+        label.font = .systemFont(ofSize: 20, weight: .bold)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
+        
+    }
+    
+    func setAddSubViews() {
+        self.view.addSubviews([
+            self.mainTableView
+        ])
+    }
+    
+    func setLayouts() {
+        var safeAreaTopAnchor: NSLayoutYAxisAnchor
+        if #available(iOS 11.0, *) {
+            safeAreaTopAnchor = self.view.safeAreaLayoutGuide.topAnchor
+        } else {
+            // Fallback on earlier versions
+            safeAreaTopAnchor = self.view.topAnchor
+        }
+        
+        NSLayoutConstraint.activate([
+            self.mainTableView.topAnchor.constraint(equalTo: safeAreaTopAnchor),
+            self.mainTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.mainTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.mainTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        ])
+    }
+    
+    func setDelegates() {
+        self.mainTableView.delegate = self
+        self.mainTableView.dataSource = self
+    }
+    
+    func setAddTargets() {
+        
+    }
+    
+    func setGestures() {
+        
+    }
 }
 
+// MARK: - 통신 관련 함수
+extension MainViewController {
+    /// api에서 데이터를 읽어들인다.
+    func getData() {
+        let urlStr = "https://itunes.apple.com/search?term=" + self.searchedWord + "&country=kr&media=software"
+        
+        if let encoded  = urlStr.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed),
+            let myURL = URL(string: encoded){
+            AF.request(myURL)
+                .validate(statusCode: 200..<300)
+                .responseData { response in
+                    switch response.result {
+                    case .success:
+                        do {
+                            let decoder = JSONDecoder()
+                            if let data = response.data {
+                                let decodedData = try decoder.decode(ItunesAppInfo.self, from: data)
+                                self.searchedData = decodedData
+                                
+                                DispatchQueue.main.async {
+                                    self.mainTableView.reloadData()
+                                }
+                            } else {
+                                print("No Data")
+                            }
+                        } catch let error {
+                            print("Error:::", error.localizedDescription)
+                        }
+                    case let .failure(error):
+                        print(error)
+                    }
+            }
+        }
+    }
+}
+
+// MARK: -
+extension MainViewController: UITableViewDelegate {
+    
+}
+
+extension MainViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.searchedData?.resultCount ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let mainCell = tableView.dequeueReusableCell(withIdentifier: "mainCell", for: indexPath) as! MainTableViewCell
+        mainCell.titleLabel.text = self.searchedData?.results![indexPath.row].trackName!
+        return mainCell
+    }
+    
+    
+}
