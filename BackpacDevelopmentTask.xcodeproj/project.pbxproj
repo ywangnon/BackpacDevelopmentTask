@@ -44,6 +44,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		011C60122478F98A005949E6 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				01F1868C2478941100C4F644 /* ViewController.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		011C60132478F9F6005949E6 /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DetailView;
+			sourceTree = "<group>";
+		};
 		01F1867C2478941100C4F644 = {
 			isa = PBXGroup;
 			children = (
@@ -66,7 +81,8 @@
 			isa = PBXGroup;
 			children = (
 				01F186882478941100C4F644 /* AppDelegate.swift */,
-				01F1868C2478941100C4F644 /* ViewController.swift */,
+				011C60122478F98A005949E6 /* MainView */,
+				011C60132478F9F6005949E6 /* DetailView */,
 				011C600E2478F531005949E6 /* Extended.swift */,
 				011C60102478F914005949E6 /* Codable.swift */,
 				01F1868E2478941100C4F644 /* Main.storyboard */,
