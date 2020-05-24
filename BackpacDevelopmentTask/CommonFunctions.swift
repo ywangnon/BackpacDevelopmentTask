@@ -13,11 +13,22 @@ class CommonFunctions {
 }
 
 extension CommonFunctions {
+    /// 입력된 url의 이미지를 가져온다.
     func getImageByURL(urlString: String?) -> UIImage? {
         if let urlString = urlString,
             let url = URL(string: urlString),
             let data = try? Data(contentsOf: url) {
             return UIImage(data: data)
+        } else {
+            return nil
+        }
+    }
+    
+    func convertByteToMB(_ byteSize: String?) -> String? {
+        if let byte = byteSize,
+            let intByte = Int(byte) {
+            let mb = intByte / 1000000
+            return "\(mb)"
         } else {
             return nil
         }

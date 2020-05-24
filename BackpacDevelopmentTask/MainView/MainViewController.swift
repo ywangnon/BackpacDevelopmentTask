@@ -36,10 +36,12 @@ class MainViewController: UIViewController {
     }
     
     func setViewFoundations() {
-        let label = UILabel()
-        label.text = "핸드메이드"
-        label.font = .systemFont(ofSize: 20, weight: .bold)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
+//        let label = UILabel()
+//        label.text = "핸드메이드"
+//        label.font = .systemFont(ofSize: 20, weight: .bold)
+//        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
+        
+        self.title = self.searchedWord
     }
     
     func setAddSubViews() {
@@ -126,7 +128,10 @@ extension MainViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("touch")
+        self.mainTableView.deselectRow(at: indexPath, animated: false)
+        let detailVC = DetailViewController()
+        detailVC.appInfo = self.searchedData?.results![indexPath.row]
+        self.navigationController?.pushViewController(detailVC, animated: true)
     }
 }
 

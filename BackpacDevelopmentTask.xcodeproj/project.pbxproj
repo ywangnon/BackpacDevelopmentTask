@@ -8,9 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		011C600F2478F531005949E6 /* Extended.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011C600E2478F531005949E6 /* Extended.swift */; };
-		011C60112478F914005949E6 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011C60102478F914005949E6 /* Codable.swift */; };
+		011C60112478F914005949E6 /* CodableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011C60102478F914005949E6 /* CodableModel.swift */; };
 		011C601524793686005949E6 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011C601424793686005949E6 /* MainTableViewCell.swift */; };
 		011C601724796E38005949E6 /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011C601624796E37005949E6 /* CommonFunctions.swift */; };
+		011C601924797633005949E6 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011C601824797633005949E6 /* DetailViewController.swift */; };
+		01C531AE247990D9002343F7 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C531AD247990D9002343F7 /* DetailTableViewCell.swift */; };
+		01C531B02479E206002343F7 /* GenrTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C531AF2479E206002343F7 /* GenrTableViewCell.swift */; };
 		01F186892478941100C4F644 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F186882478941100C4F644 /* AppDelegate.swift */; };
 		01F1868D2478941100C4F644 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F1868C2478941100C4F644 /* MainViewController.swift */; };
 		01F186902478941100C4F644 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01F1868E2478941100C4F644 /* Main.storyboard */; };
@@ -21,9 +24,12 @@
 
 /* Begin PBXFileReference section */
 		011C600E2478F531005949E6 /* Extended.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extended.swift; sourceTree = "<group>"; };
-		011C60102478F914005949E6 /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
+		011C60102478F914005949E6 /* CodableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableModel.swift; sourceTree = "<group>"; };
 		011C601424793686005949E6 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		011C601624796E37005949E6 /* CommonFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
+		011C601824797633005949E6 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		01C531AD247990D9002343F7 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
+		01C531AF2479E206002343F7 /* GenrTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenrTableViewCell.swift; sourceTree = "<group>"; };
 		01F186852478941100C4F644 /* BackpacDevelopmentTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BackpacDevelopmentTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01F186882478941100C4F644 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01F1868C2478941100C4F644 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +66,9 @@
 		011C60132478F9F6005949E6 /* DetailView */ = {
 			isa = PBXGroup;
 			children = (
+				011C601824797633005949E6 /* DetailViewController.swift */,
+				01C531AD247990D9002343F7 /* DetailTableViewCell.swift */,
+				01C531AF2479E206002343F7 /* GenrTableViewCell.swift */,
 			);
 			path = DetailView;
 			sourceTree = "<group>";
@@ -89,7 +98,7 @@
 				011C60122478F98A005949E6 /* MainView */,
 				011C60132478F9F6005949E6 /* DetailView */,
 				011C600E2478F531005949E6 /* Extended.swift */,
-				011C60102478F914005949E6 /* Codable.swift */,
+				011C60102478F914005949E6 /* CodableModel.swift */,
 				011C601624796E37005949E6 /* CommonFunctions.swift */,
 				01F1868E2478941100C4F644 /* Main.storyboard */,
 				01F186912478941300C4F644 /* Assets.xcassets */,
@@ -233,10 +242,13 @@
 			files = (
 				011C601724796E38005949E6 /* CommonFunctions.swift in Sources */,
 				01F1868D2478941100C4F644 /* MainViewController.swift in Sources */,
+				01C531AE247990D9002343F7 /* DetailTableViewCell.swift in Sources */,
 				011C600F2478F531005949E6 /* Extended.swift in Sources */,
-				011C60112478F914005949E6 /* Codable.swift in Sources */,
+				011C60112478F914005949E6 /* CodableModel.swift in Sources */,
 				01F186892478941100C4F644 /* AppDelegate.swift in Sources */,
+				01C531B02479E206002343F7 /* GenrTableViewCell.swift in Sources */,
 				011C601524793686005949E6 /* MainTableViewCell.swift in Sources */,
+				011C601924797633005949E6 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
