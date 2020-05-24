@@ -12,6 +12,7 @@ class GenrTableViewCell: UITableViewCell {
     // MARK: 장르 영역
     var genrView: UIView = {
         let view = UIView()
+        view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -56,7 +57,7 @@ class GenrTableViewCell: UITableViewCell {
     }
     
     func setViewFoundations() {
-        
+        self.backgroundColor = .clear
     }
     
     func setAddSubViews() {
@@ -72,8 +73,9 @@ class GenrTableViewCell: UITableViewCell {
     
     func setLayouts() {
         NSLayoutConstraint.activate([
-            self.genrView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 8),
-            self.genrView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8),
+            self.genrView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16),
+            self.genrView.bottomAnchor.constraint(equalTo: self.genrScrollView.bottomAnchor, constant: 16),
+            self.genrView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -16),
             self.genrView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
             self.genrView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
         ])
@@ -111,7 +113,7 @@ class GenrTableViewCell: UITableViewCell {
         
         self.genrScrollView.contentSize = CGSize(width: self.contentView.frame.width * CGFloat(genrs.count),
                                                 height: self.genrScrollView.frame.height)
-        var xPosition: CGFloat = 0
+        var xPosition: CGFloat = 8
         for i in 0..<genrs.count {
             let label = UILabel()
             label.text = genrs[i]
@@ -119,8 +121,6 @@ class GenrTableViewCell: UITableViewCell {
             label.layer.borderWidth = 1
             label.layer.cornerRadius = 5
             label.sizeToFit()
-            
-//            let xPosition = self.contentView.frame.width * CGFloat(i)
             
             label.frame = CGRect(x: xPosition,
                                  y: 0,

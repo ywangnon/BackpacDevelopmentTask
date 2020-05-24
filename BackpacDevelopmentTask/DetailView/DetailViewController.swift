@@ -15,6 +15,8 @@ class DetailViewController: UIViewController {
         let tableView = UITableView()
         tableView.bounces = false
         tableView.allowsSelection = false
+        tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
         tableView.register(DetailTableViewCell.self, forCellReuseIdentifier: "detailCell")
         tableView.register(GenrTableViewCell.self, forCellReuseIdentifier: "genrCell")
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -34,7 +36,13 @@ class DetailViewController: UIViewController {
     }
     
     func setViewFoundations() {
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .darkGray
+        
+        if #available(iOS 11.0, *) {
+            self.navigationItem.largeTitleDisplayMode = .never
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     func setAddSubViews() {
@@ -97,7 +105,6 @@ extension DetailViewController: UITableViewDataSource {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath) as! DetailTableViewCell
             cell.setDetailInfo(self.appInfo!)
-//            cell.setImage(urlStrings: (self.appInfo?.screenshotUrls)!)
             return cell
         } else { // row is 1
             let cell = tableView.dequeueReusableCell(withIdentifier: "genrCell", for: indexPath) as! GenrTableViewCell

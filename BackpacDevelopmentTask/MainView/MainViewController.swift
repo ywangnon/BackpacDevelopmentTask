@@ -36,12 +36,17 @@ class MainViewController: UIViewController {
     }
     
     func setViewFoundations() {
-//        let label = UILabel()
-//        label.text = "핸드메이드"
-//        label.font = .systemFont(ofSize: 20, weight: .bold)
-//        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
-        
         self.title = self.searchedWord
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+        } else {
+            // Fallback on earlier versions
+//            let label = UILabel()
+//            label.text = "핸드메이드"
+//            label.sizeToFit()
+//            label.font = .systemFont(ofSize: 20, weight: .bold)
+//            self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
+        }
     }
     
     func setAddSubViews() {

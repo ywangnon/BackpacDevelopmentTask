@@ -18,6 +18,7 @@ class DetailTableViewCell: UITableViewCell {
     // MARK: 미리보기 이미지
     var imgScrollView: UIScrollView = {
         let scrollView = UIScrollView()
+        scrollView.bounces = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
@@ -179,35 +180,32 @@ class DetailTableViewCell: UITableViewCell {
         return button
     }()
     
+    var releaseNotesDescriptionLineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     var releaseNotesDescriptionLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.backgroundColor = .darkGray
+        label.backgroundColor = .lightGray
         label.translatesAutoresizingMaskIntoConstraints = false
-        
-        let lineView = UIView()
-        lineView.backgroundColor = .gray
-        
-        label.addSubview(lineView)
-        
-        NSLayoutConstraint.activate([
-            lineView.leadingAnchor.constraint(equalTo: label.leadingAnchor),
-            lineView.trailingAnchor.constraint(equalTo: label.trailingAnchor),
-            lineView.topAnchor.constraint(equalTo: label.topAnchor),
-            lineView.heightAnchor.constraint(equalToConstant: 1)
-        ])
-        
         return label
     }()
     
     // MARK: 설명
     var appDescriptionLabel: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 0
+        label.numberOfLines = 10
+        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    var descriptionLabelHeight: NSLayoutConstraint?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -288,6 +286,7 @@ class DetailTableViewCell: UITableViewCell {
             self.releaseNotesTitleLabel,
             self.releaseNotesLabel,
             self.releaseNotesImageView,
+            self.releaseNotesDescriptionLineView,
             self.releaseNotesButton
         ])
     }
@@ -304,8 +303,10 @@ class DetailTableViewCell: UITableViewCell {
             self.imgScrollView.topAnchor.constraint(equalTo: self.defaultView.topAnchor),
             self.imgScrollView.leadingAnchor.constraint(equalTo: self.defaultView.leadingAnchor),
             self.imgScrollView.widthAnchor.constraint(equalTo: self.defaultView.widthAnchor),
-            self.imgScrollView.heightAnchor.constraint(equalTo: self.defaultView.widthAnchor)
+            self.imgScrollView.heightAnchor.constraint(equalToConstant: self.contentView.frame.width)
         ])
+        print("DefaultView Size", self.defaultView.frame)
+        print("ContentView Size", self.contentView.frame)
         
         NSLayoutConstraint.activate([
             self.defaultInfoView.topAnchor.constraint(equalTo: self.imgScrollView.bottomAnchor),
@@ -443,14 +444,21 @@ class DetailTableViewCell: UITableViewCell {
             self.releaseNotesImageView.trailingAnchor.constraint(equalTo: self.releaseNotesView.trailingAnchor, constant: -16),
             self.releaseNotesImageView.centerYAnchor.constraint(equalTo: self.releaseNotesView.centerYAnchor),
             self.releaseNotesImageView.widthAnchor.constraint(equalToConstant: 8),
-            
+            self.releaseNotesImageView.heightAnchor.constraint(equalToConstant: 8)
         ])
         
         NSLayoutConstraint.activate([
             self.releaseNotesLabel.centerYAnchor.constraint(equalTo: self.releaseNotesTitleLabel.centerYAnchor),
-            self.releaseNotesLabel.trailingAnchor.constraint(equalTo: self.releaseNotesView.trailingAnchor, constant: -16)
+            self.releaseNotesLabel.trailingAnchor.constraint(equalTo: self.releaseNotesImageView.leadingAnchor, constant: -16)
         ])
         self.releaseNotesLabel.sizeToFit()
+        
+        NSLayoutConstraint.activate([
+            self.releaseNotesDescriptionLineView.leadingAnchor.constraint(equalTo: self.releaseNotesView.leadingAnchor, constant: 8),
+            self.releaseNotesDescriptionLineView.trailingAnchor.constraint(equalTo: self.releaseNotesView.trailingAnchor, constant: -8),
+            self.releaseNotesDescriptionLineView.bottomAnchor.constraint(equalTo: self.releaseNotesView.bottomAnchor),
+            self.releaseNotesDescriptionLineView.heightAnchor.constraint(equalToConstant: 1)
+        ])
         
         NSLayoutConstraint.activate([
             self.releaseNotesButton.topAnchor.constraint(equalTo: self.releaseNotesView.topAnchor),
@@ -459,12 +467,14 @@ class DetailTableViewCell: UITableViewCell {
             self.releaseNotesButton.trailingAnchor.constraint(equalTo: self.releaseNotesView.trailingAnchor)
         ])
         
+        self.descriptionLabelHeight = self.releaseNotesDescriptionLabel.heightAnchor.constraint(equalToConstant: 1)
         NSLayoutConstraint.activate([
             self.releaseNotesDescriptionLabel.topAnchor.constraint(equalTo: self.additionalInfoAreaView.bottomAnchor),
             self.releaseNotesDescriptionLabel.leadingAnchor.constraint(equalTo: self.additionalInfoAreaView.leadingAnchor, constant: 8),
             self.releaseNotesDescriptionLabel.trailingAnchor.constraint(equalTo: self.additionalInfoAreaView.trailingAnchor, constant: -8)
         ])
         self.releaseNotesDescriptionLabel.sizeToFit()
+        self.isActiveReleaseNote(false)
         
         NSLayoutConstraint.activate([
             self.appDescriptionLabel.topAnchor.constraint(equalTo: self.releaseNotesDescriptionLabel.bottomAnchor),
@@ -480,13 +490,15 @@ class DetailTableViewCell: UITableViewCell {
     }
     
     func setAddTargets() {
-        
+        self.releaseNotesButton.addTarget(self, action: #selector(self.activeReleaseNoteButton(_:)), for: .touchUpInside)
     }
     
     func setGestures() {
         
     }
     
+    /// 미리보기 이미지 주소 배열을 가지고 미리보기 화면을 만든다.
+    /// - Parameter urlStrings: 주소 문자 배열
     func setImage(urlStrings: [String]?) {
         guard let urls = urlStrings else {
             return
@@ -494,11 +506,11 @@ class DetailTableViewCell: UITableViewCell {
         // 이미지 비율이 4:7, 간단하게 2배로 함.
         let imgViewSize = CGSize(width: self.contentView.frame.width * 0.5,
                                  height: self.contentView.frame.width)
+        print("imgView Size:::", imgViewSize)
         self.imgScrollView.contentSize = CGSize(width: (5 + imgViewSize.width) * CGFloat(urls.count) + 5,
                                                 height: imgViewSize.height)
         for i in 0..<urls.count {
             if let image = CommonFunctions.shared.getImageByURL(urlString: urls[i]) {
-                print("input image")
                 let imgView = UIImageView()
                 imgView.image = image
                 imgView.contentMode = .scaleAspectFit
@@ -517,6 +529,8 @@ class DetailTableViewCell: UITableViewCell {
         self.setLayouts()
     }
     
+    /// 앱 정보를 가지고 elements들을 설정한다.
+    /// - Parameter info: 앱 정보
     func setDetailInfo(_ info: AppInfo) {
         self.setImage(urlStrings: info.screenshotUrls)
         self.appNameLabel.text = info.trackName
@@ -528,6 +542,33 @@ class DetailTableViewCell: UITableViewCell {
         self.releaseNotesDescriptionLabel.text = info.releaseNotes
         self.appDescriptionLabel.text = info.description
     }
+}
+
+extension DetailTableViewCell {
+    func isActiveReleaseNote(_ active: Bool) {
+        if active {
+            self.releaseNotesImageView.image = UIImage(named: "UpArrow")
+            if let labelHeight = self.descriptionLabelHeight {
+                NSLayoutConstraint.deactivate([labelHeight])
+            }
+            self.releaseNotesDescriptionLabel.isHidden = false
+        } else {
+            self.releaseNotesImageView.image = UIImage(named: "DownArrow")
+            if let labelHeight = self.descriptionLabelHeight {
+                NSLayoutConstraint.activate([labelHeight])
+            }
+            self.releaseNotesDescriptionLabel.isHidden = true
+        }
+    }
+}
+
+// MARK: - 버튼 기능
+extension DetailTableViewCell {
+    @objc func activeReleaseNoteButton(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        self.isActiveReleaseNote(sender.isSelected)
+    }
+    
 }
 
 extension DetailTableViewCell: UIScrollViewDelegate {
