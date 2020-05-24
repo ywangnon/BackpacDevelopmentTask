@@ -11,7 +11,6 @@ import UIKit
 class DetailTableViewCell: UITableViewCell {
     var defaultView: UIView = {
         let view = UIView()
-        view.backgroundColor = .blue
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -32,7 +31,7 @@ class DetailTableViewCell: UITableViewCell {
     
     var appNameLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title3)
+        label.font = .preferredFont(forTextStyle: .title1)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -46,12 +45,23 @@ class DetailTableViewCell: UITableViewCell {
     
     var priceLabel: UILabel = {
         let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .title1)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     var linkAreaView: UIView = {
         let view = UIView()
+        view.layer.cornerRadius = 5
+        view.layer.borderColor = UIColor.darkGray.cgColor
+        view.layer.borderWidth = 1
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    var linkAreaCenterLineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .darkGray
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -59,6 +69,7 @@ class DetailTableViewCell: UITableViewCell {
     var webButton: UIButton = {
         let button = UIButton()
         button.setTitle("웹에서 보기", for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -66,6 +77,7 @@ class DetailTableViewCell: UITableViewCell {
     var shareButton: UIButton = {
         let button = UIButton()
         button.setTitle("공유하기", for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -85,6 +97,7 @@ class DetailTableViewCell: UITableViewCell {
     
     var sizeLineView: UIView = {
         let view = UIView()
+        view.backgroundColor = .gray
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -110,6 +123,7 @@ class DetailTableViewCell: UITableViewCell {
     
     var ageLineView: UIView = {
         let view = UIView()
+        view.backgroundColor = .gray
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -135,6 +149,7 @@ class DetailTableViewCell: UITableViewCell {
     
     var releaseNotesLineView: UIView = {
         let view = UIView()
+        view.backgroundColor = .gray
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -168,7 +183,21 @@ class DetailTableViewCell: UITableViewCell {
         let label = UILabel()
         label.textAlignment = .center
         label.numberOfLines = 0
+        label.backgroundColor = .darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
+        
+        let lineView = UIView()
+        lineView.backgroundColor = .gray
+        
+        label.addSubview(lineView)
+        
+        NSLayoutConstraint.activate([
+            lineView.leadingAnchor.constraint(equalTo: label.leadingAnchor),
+            lineView.trailingAnchor.constraint(equalTo: label.trailingAnchor),
+            lineView.topAnchor.constraint(equalTo: label.topAnchor),
+            lineView.heightAnchor.constraint(equalToConstant: 1)
+        ])
+        
         return label
     }()
     
@@ -207,7 +236,7 @@ class DetailTableViewCell: UITableViewCell {
     }
     
     func setViewFoundations() {
-        self.backgroundColor = .red
+        self.backgroundColor = .white
     }
     
     func setAddSubViews() {
@@ -231,6 +260,7 @@ class DetailTableViewCell: UITableViewCell {
         ])
 
         self.linkAreaView.addSubviews([
+            self.linkAreaCenterLineView,
             self.webButton,
             self.shareButton
         ])
@@ -271,16 +301,16 @@ class DetailTableViewCell: UITableViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            self.imgScrollView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
-            self.imgScrollView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
-            self.imgScrollView.widthAnchor.constraint(equalTo: self.contentView.widthAnchor),
-            self.imgScrollView.heightAnchor.constraint(equalTo: self.contentView.widthAnchor)
+            self.imgScrollView.topAnchor.constraint(equalTo: self.defaultView.topAnchor),
+            self.imgScrollView.leadingAnchor.constraint(equalTo: self.defaultView.leadingAnchor),
+            self.imgScrollView.widthAnchor.constraint(equalTo: self.defaultView.widthAnchor),
+            self.imgScrollView.heightAnchor.constraint(equalTo: self.defaultView.widthAnchor)
         ])
         
         NSLayoutConstraint.activate([
             self.defaultInfoView.topAnchor.constraint(equalTo: self.imgScrollView.bottomAnchor),
-            self.defaultInfoView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
-            self.defaultInfoView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+            self.defaultInfoView.leadingAnchor.constraint(equalTo: self.defaultView.leadingAnchor),
+            self.defaultInfoView.trailingAnchor.constraint(equalTo: self.defaultView.trailingAnchor),
             self.defaultInfoView.bottomAnchor.constraint(equalTo: self.linkAreaView.bottomAnchor, constant: 8)
         ])
         
@@ -303,10 +333,17 @@ class DetailTableViewCell: UITableViewCell {
         self.priceLabel.sizeToFit()
         
         NSLayoutConstraint.activate([
-            self.linkAreaView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
-            self.linkAreaView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8),
+            self.linkAreaView.leadingAnchor.constraint(equalTo: self.defaultView.leadingAnchor, constant: 8),
+            self.linkAreaView.trailingAnchor.constraint(equalTo: self.defaultView.trailingAnchor, constant: -8),
             self.linkAreaView.topAnchor.constraint(equalTo: self.priceLabel.bottomAnchor, constant: 16),
             self.linkAreaView.heightAnchor.constraint(equalToConstant: 48)
+        ])
+        
+        NSLayoutConstraint.activate([
+            self.linkAreaCenterLineView.widthAnchor.constraint(equalToConstant: 1),
+            self.linkAreaCenterLineView.leadingAnchor.constraint(equalTo: self.webButton.trailingAnchor),
+            self.linkAreaCenterLineView.trailingAnchor.constraint(equalTo: self.shareButton.leadingAnchor),
+            self.linkAreaCenterLineView.heightAnchor.constraint(equalTo: self.linkAreaView.heightAnchor)
         ])
         
         NSLayoutConstraint.activate([
@@ -317,7 +354,7 @@ class DetailTableViewCell: UITableViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            self.shareButton.leadingAnchor.constraint(equalTo: self.webButton.trailingAnchor),
+//            self.shareButton.leadingAnchor.constraint(equalTo: self.webButton.trailingAnchor),
             self.shareButton.topAnchor.constraint(equalTo: self.linkAreaView.topAnchor),
             self.shareButton.bottomAnchor.constraint(equalTo: self.linkAreaView.bottomAnchor),
             self.shareButton.trailingAnchor.constraint(equalTo: self.linkAreaView.trailingAnchor)
@@ -325,8 +362,8 @@ class DetailTableViewCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             self.additionalInfoAreaView.topAnchor.constraint(equalTo: self.defaultInfoView.bottomAnchor),
-            self.additionalInfoAreaView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
-            self.additionalInfoAreaView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+            self.additionalInfoAreaView.leadingAnchor.constraint(equalTo: self.defaultView.leadingAnchor),
+            self.additionalInfoAreaView.trailingAnchor.constraint(equalTo: self.defaultView.trailingAnchor),
             self.additionalInfoAreaView.heightAnchor.constraint(equalToConstant: 48 * 3)
         ])
         
@@ -377,7 +414,7 @@ class DetailTableViewCell: UITableViewCell {
         self.ageTitleLabel.sizeToFit()
         
         NSLayoutConstraint.activate([
-            self.ageLabel.centerYAnchor.constraint(equalTo: self.ageLineView.centerYAnchor),
+            self.ageLabel.centerYAnchor.constraint(equalTo: self.ageTitleLabel.centerYAnchor),
             self.ageLabel.trailingAnchor.constraint(equalTo: self.ageView.trailingAnchor, constant: -16)
         ])
         self.ageLabel.sizeToFit()
@@ -403,7 +440,14 @@ class DetailTableViewCell: UITableViewCell {
         self.releaseNotesTitleLabel.sizeToFit()
         
         NSLayoutConstraint.activate([
-            self.releaseNotesLabel.centerYAnchor.constraint(equalTo: self.releaseNotesLineView.centerYAnchor),
+            self.releaseNotesImageView.trailingAnchor.constraint(equalTo: self.releaseNotesView.trailingAnchor, constant: -16),
+            self.releaseNotesImageView.centerYAnchor.constraint(equalTo: self.releaseNotesView.centerYAnchor),
+            self.releaseNotesImageView.widthAnchor.constraint(equalToConstant: 8),
+            
+        ])
+        
+        NSLayoutConstraint.activate([
+            self.releaseNotesLabel.centerYAnchor.constraint(equalTo: self.releaseNotesTitleLabel.centerYAnchor),
             self.releaseNotesLabel.trailingAnchor.constraint(equalTo: self.releaseNotesView.trailingAnchor, constant: -16)
         ])
         self.releaseNotesLabel.sizeToFit()
@@ -417,15 +461,16 @@ class DetailTableViewCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             self.releaseNotesDescriptionLabel.topAnchor.constraint(equalTo: self.additionalInfoAreaView.bottomAnchor),
-            self.releaseNotesDescriptionLabel.leadingAnchor.constraint(equalTo: self.additionalInfoAreaView.leadingAnchor),
-            self.releaseNotesDescriptionLabel.trailingAnchor.constraint(equalTo: self.additionalInfoAreaView.trailingAnchor)
+            self.releaseNotesDescriptionLabel.leadingAnchor.constraint(equalTo: self.additionalInfoAreaView.leadingAnchor, constant: 8),
+            self.releaseNotesDescriptionLabel.trailingAnchor.constraint(equalTo: self.additionalInfoAreaView.trailingAnchor, constant: -8)
         ])
         self.releaseNotesDescriptionLabel.sizeToFit()
         
         NSLayoutConstraint.activate([
             self.appDescriptionLabel.topAnchor.constraint(equalTo: self.releaseNotesDescriptionLabel.bottomAnchor),
             self.appDescriptionLabel.leadingAnchor.constraint(equalTo: self.additionalInfoAreaView.leadingAnchor),
-            self.appDescriptionLabel.trailingAnchor.constraint(equalTo: self.additionalInfoAreaView.trailingAnchor)
+            self.appDescriptionLabel.trailingAnchor.constraint(equalTo: self.additionalInfoAreaView.trailingAnchor),
+            self.appDescriptionLabel.bottomAnchor.constraint(equalTo: self.defaultView.bottomAnchor)
         ])
         self.appDescriptionLabel.sizeToFit()
     }
@@ -446,21 +491,23 @@ class DetailTableViewCell: UITableViewCell {
         guard let urls = urlStrings else {
             return
         }
-        
-        self.imgScrollView.contentSize = CGSize(width: self.contentView.frame.width * CGFloat(urls.count),
-                                                height: self.imgScrollView.frame.height)
+        // 이미지 비율이 4:7, 간단하게 2배로 함.
+        let imgViewSize = CGSize(width: self.contentView.frame.width * 0.5,
+                                 height: self.contentView.frame.width)
+        self.imgScrollView.contentSize = CGSize(width: (5 + imgViewSize.width) * CGFloat(urls.count) + 5,
+                                                height: imgViewSize.height)
         for i in 0..<urls.count {
             if let image = CommonFunctions.shared.getImageByURL(urlString: urls[i]) {
                 print("input image")
                 let imgView = UIImageView()
                 imgView.image = image
-//                imgView.contentMode = .scaleAspectFit
-                let xPosition = self.contentView.frame.width * CGFloat(i)
+                imgView.contentMode = .scaleAspectFit
+                let xPosition = (5 + imgViewSize.width) * CGFloat(i) + 5
                 
                 imgView.frame = CGRect(x: xPosition,
                                        y: 0,
-                                       width: self.contentView.frame.width,
-                                       height: self.contentView.frame.width)
+                                       width: imgViewSize.width,
+                                       height: imgViewSize.height)
                 
                 self.imgScrollView.addSubview(imgView)
             }
@@ -474,7 +521,7 @@ class DetailTableViewCell: UITableViewCell {
         self.setImage(urlStrings: info.screenshotUrls)
         self.appNameLabel.text = info.trackName
         self.sellerLabel.text = info.sellerName
-        self.priceLabel.text = info.formattedPrice == nil ? "무료" : info.formattedPrice! + " 원"
+        self.priceLabel.text = info.formattedPrice // == nil ? "무료" : info.formattedPrice! + " 원"
         self.sizeLabel.text = CommonFunctions.shared.convertByteToMB(info.fileSizeBytes)
         self.ageLabel.text = info.contentAdvisoryRating
         self.releaseNotesLabel.text = info.version

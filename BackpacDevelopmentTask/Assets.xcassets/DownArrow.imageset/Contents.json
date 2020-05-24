@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "angle-arrow-down_icon-icons.com_73683.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "angle-arrow-down_icon-icons.com_73683-2.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "angle-arrow-down_icon-icons.com_73683-3.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

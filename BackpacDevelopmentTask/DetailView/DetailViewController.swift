@@ -13,6 +13,8 @@ class DetailViewController: UIViewController {
     
     var detailTableView: UITableView = {
         let tableView = UITableView()
+        tableView.bounces = false
+        tableView.allowsSelection = false
         tableView.register(DetailTableViewCell.self, forCellReuseIdentifier: "detailCell")
         tableView.register(GenrTableViewCell.self, forCellReuseIdentifier: "genrCell")
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -74,6 +76,10 @@ class DetailViewController: UIViewController {
 
 extension DetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
             return self.view.frame.height
         } else {
