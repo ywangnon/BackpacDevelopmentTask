@@ -10,7 +10,9 @@ import UIKit
 import Alamofire
 
 class MainViewController: UIViewController {
+    /// 검색한 키워드
     let searchedWord: String = "핸드메이드"
+    /// 검색된 데이터
     var searchedData: ItunesAppInfo?
     
     var mainTableView: UITableView = {
@@ -40,12 +42,22 @@ class MainViewController: UIViewController {
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.prefersLargeTitles = true
         } else {
-            // Fallback on earlier versions
-//            let label = UILabel()
-//            label.text = "핸드메이드"
-//            label.sizeToFit()
-//            label.font = .systemFont(ofSize: 20, weight: .bold)
-//            self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
+            let label = UILabel()
+
+            label.translatesAutoresizingMaskIntoConstraints = false
+
+            label.text = self.searchedWord
+            label.font = .systemFont(ofSize: 20, weight: .bold)
+//            label.backgroundColor = .green
+
+            label.textAlignment = .left
+
+            navigationItem.titleView = label
+
+            if let navigationBar = navigationController?.navigationBar {
+
+                label.widthAnchor.constraint(equalTo: navigationBar.widthAnchor, constant: -40).isActive = true
+            }
         }
     }
     
@@ -129,7 +141,7 @@ extension MainViewController {
 // MARK: -
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.view.frame.width * 1.3
+        return self.view.frame.width * 1.33
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -152,7 +164,7 @@ extension MainViewController: UITableViewDataSource {
         mainCell.sellerNameLabel.text = self.searchedData?.results![indexPath.row].sellerName
         mainCell.genrelabel.text = self.searchedData?.results![indexPath.row].primaryGenreName
         mainCell.priceLabel.text = self.searchedData?.results![indexPath.row].formattedPrice
-        mainCell.ratingView.rating = self.searchedData?.results![indexPath.row].averageUserRating as! Double
+        mainCell.ratingView.rating = (self.searchedData?.results![indexPath.row].averageUserRating)!
         return mainCell
     }
 }

@@ -355,7 +355,6 @@ class DetailTableViewCell: UITableViewCell {
         ])
         
         NSLayoutConstraint.activate([
-//            self.shareButton.leadingAnchor.constraint(equalTo: self.webButton.trailingAnchor),
             self.shareButton.topAnchor.constraint(equalTo: self.linkAreaView.topAnchor),
             self.shareButton.bottomAnchor.constraint(equalTo: self.linkAreaView.bottomAnchor),
             self.shareButton.trailingAnchor.constraint(equalTo: self.linkAreaView.trailingAnchor)
@@ -536,7 +535,7 @@ class DetailTableViewCell: UITableViewCell {
         self.appNameLabel.text = info.trackName
         self.sellerLabel.text = info.sellerName
         self.priceLabel.text = info.formattedPrice // == nil ? "무료" : info.formattedPrice! + " 원"
-        self.sizeLabel.text = CommonFunctions.shared.convertByteToMB(info.fileSizeBytes)
+        self.sizeLabel.text = CommonFunctions.shared.convertByteToMB(info.fileSizeBytes) ?? "0" + "MB"
         self.ageLabel.text = info.contentAdvisoryRating
         self.releaseNotesLabel.text = info.version
         self.releaseNotesDescriptionLabel.text = info.releaseNotes
@@ -559,6 +558,7 @@ extension DetailTableViewCell {
             }
             self.releaseNotesDescriptionLabel.isHidden = true
         }
+        self.layoutIfNeeded()
     }
 }
 

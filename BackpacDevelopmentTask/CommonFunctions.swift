@@ -33,4 +33,12 @@ extension CommonFunctions {
             return nil
         }
     }
+    
+    func checkHomeIndicator() -> Bool {
+        if #available(iOS 11.0, *) {
+            return UIWindow().safeAreaInsets.bottom == 34
+        } else {
+            return false
+        }
+    }
 }

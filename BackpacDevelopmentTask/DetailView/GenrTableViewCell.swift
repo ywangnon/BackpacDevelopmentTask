@@ -12,7 +12,6 @@ class GenrTableViewCell: UITableViewCell {
     // MARK: 장르 영역
     var genrView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -20,12 +19,15 @@ class GenrTableViewCell: UITableViewCell {
     var genrLabel: UILabel = {
         let label = UILabel()
         label.text = "카테고리"
+        label.font = .preferredFont(forTextStyle: .title3)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     var genrScrollView: UIScrollView = {
         let scrollView = UIScrollView()
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
@@ -57,11 +59,11 @@ class GenrTableViewCell: UITableViewCell {
     }
     
     func setViewFoundations() {
-        self.backgroundColor = .clear
+        self.backgroundColor = .white
     }
     
     func setAddSubViews() {
-        self.addSubviews([
+        self.contentView.addSubviews([
             self.genrView
         ])
         
@@ -74,7 +76,7 @@ class GenrTableViewCell: UITableViewCell {
     func setLayouts() {
         NSLayoutConstraint.activate([
             self.genrView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16),
-            self.genrView.bottomAnchor.constraint(equalTo: self.genrScrollView.bottomAnchor, constant: 16),
+            self.genrView.bottomAnchor.constraint(equalTo: self.genrLabel.bottomAnchor, constant: 48),
             self.genrView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -16),
             self.genrView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
             self.genrView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
@@ -116,7 +118,7 @@ class GenrTableViewCell: UITableViewCell {
         var xPosition: CGFloat = 8
         for i in 0..<genrs.count {
             let label = UILabel()
-            label.text = genrs[i]
+            label.text = "#" + genrs[i]
             label.layer.borderColor = UIColor.lightGray.cgColor
             label.layer.borderWidth = 1
             label.layer.cornerRadius = 5
