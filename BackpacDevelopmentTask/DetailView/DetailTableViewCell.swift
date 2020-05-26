@@ -227,7 +227,6 @@ class DetailTableViewCell: UITableViewCell {
         self.setLayouts()
         self.setDelegates()
         self.setAddTargets()
-        self.setGestures()
     }
     
     required init?(coder: NSCoder) {
@@ -332,6 +331,7 @@ class DetailTableViewCell: UITableViewCell {
         ])
         self.priceLabel.sizeToFit()
         
+        // MARK: 웹에서 보기, 공유하기
         NSLayoutConstraint.activate([
             self.linkAreaView.leadingAnchor.constraint(equalTo: self.defaultView.leadingAnchor, constant: 8),
             self.linkAreaView.trailingAnchor.constraint(equalTo: self.defaultView.trailingAnchor, constant: -8),
@@ -360,6 +360,7 @@ class DetailTableViewCell: UITableViewCell {
             self.shareButton.trailingAnchor.constraint(equalTo: self.linkAreaView.trailingAnchor)
         ])
         
+        // MARK: 크기, 연령, 새로운 기능 영역
         NSLayoutConstraint.activate([
             self.additionalInfoAreaView.topAnchor.constraint(equalTo: self.defaultInfoView.bottomAnchor),
             self.additionalInfoAreaView.leadingAnchor.constraint(equalTo: self.defaultView.leadingAnchor),
@@ -367,6 +368,7 @@ class DetailTableViewCell: UITableViewCell {
             self.additionalInfoAreaView.heightAnchor.constraint(equalToConstant: 48 * 3)
         ])
         
+        // MARK: 크기
         NSLayoutConstraint.activate([
             self.sizeView.topAnchor.constraint(equalTo: self.additionalInfoAreaView.topAnchor),
             self.sizeView.leadingAnchor.constraint(equalTo: self.additionalInfoAreaView.leadingAnchor),
@@ -393,6 +395,7 @@ class DetailTableViewCell: UITableViewCell {
         ])
         self.sizeLabel.sizeToFit()
         
+        // MARK: 연령
         NSLayoutConstraint.activate([
             self.ageView.topAnchor.constraint(equalTo: self.sizeView.bottomAnchor),
             self.ageView.leadingAnchor.constraint(equalTo: self.additionalInfoAreaView.leadingAnchor),
@@ -419,6 +422,7 @@ class DetailTableViewCell: UITableViewCell {
         ])
         self.ageLabel.sizeToFit()
         
+        // MARK: 새로운 기능
         NSLayoutConstraint.activate([
             self.releaseNotesView.topAnchor.constraint(equalTo: self.ageView.bottomAnchor),
             self.releaseNotesView.leadingAnchor.constraint(equalTo: self.additionalInfoAreaView.leadingAnchor),
@@ -475,6 +479,7 @@ class DetailTableViewCell: UITableViewCell {
         self.releaseNotesDescriptionLabel.sizeToFit()
         self.isActiveReleaseNote(false)
         
+        // MARK: 앱 설명
         NSLayoutConstraint.activate([
             self.appDescriptionLabel.topAnchor.constraint(equalTo: self.releaseNotesDescriptionLabel.bottomAnchor),
             self.appDescriptionLabel.leadingAnchor.constraint(equalTo: self.additionalInfoAreaView.leadingAnchor),
@@ -490,10 +495,6 @@ class DetailTableViewCell: UITableViewCell {
     
     func setAddTargets() {
         self.releaseNotesButton.addTarget(self, action: #selector(self.activeReleaseNoteButton(_:)), for: .touchUpInside)
-    }
-    
-    func setGestures() {
-        
     }
     
     /// 미리보기 이미지 주소 배열을 가지고 미리보기 화면을 만든다.

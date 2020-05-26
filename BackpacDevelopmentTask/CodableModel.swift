@@ -82,3 +82,10 @@ struct AppInfo: Codable {
         case userRatingCount
     }
 }
+
+/**
+ 출처: https://medium.com/@prafullkumar77/ios-check-and-show-update-with-apple-itunes-api-5e0b93a54de9
+ 
+ 아이튠즈 api를 사용한다면 인터넷에 codable로 정리해놓은 자료가 있을 것이라 생각했습니다.
+ */
+

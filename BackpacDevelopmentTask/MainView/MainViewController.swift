@@ -108,7 +108,7 @@ extension MainViewController: UITableViewDataSource {
         mainCell.sellerNameLabel.text = self.searchedData?.results![indexPath.row].sellerName
         mainCell.genrelabel.text = self.searchedData?.results![indexPath.row].primaryGenreName
         mainCell.priceLabel.text = self.searchedData?.results![indexPath.row].formattedPrice
-        mainCell.ratingView.rating = (self.searchedData?.results![indexPath.row].averageUserRating)!
+        mainCell.ratingView.rating = CommonFunctions.shared.roundingNumber(self.searchedData?.results![indexPath.row].averageUserRating)
         return mainCell
     }
 }

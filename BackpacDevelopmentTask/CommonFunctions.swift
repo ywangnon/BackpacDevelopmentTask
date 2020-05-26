@@ -19,9 +19,8 @@ extension CommonFunctions {
             let url = URL(string: urlString),
             let data = try? Data(contentsOf: url) {
             return UIImage(data: data)
-        } else {
-            return nil
         }
+        return nil
     }
     
     func convertByteToMB(_ byteSize: String?) -> String? {
@@ -29,16 +28,22 @@ extension CommonFunctions {
             let intByte = Int(byte) {
             let mb = intByte / 1000000
             return "\(mb)"
-        } else {
-            return nil
         }
+        return nil
     }
     
     func checkHomeIndicator() -> Bool {
         if #available(iOS 11.0, *) {
             return UIWindow().safeAreaInsets.bottom == 34
-        } else {
-            return false
         }
+        return false
+    }
+    
+    func roundingNumber(_ number: Double?) -> Double {
+        if let number = number {
+            print(round(number * 10) / 10)
+            return round(number * 10) / 10
+        }
+        return 0.0
     }
 }

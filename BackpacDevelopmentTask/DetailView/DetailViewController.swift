@@ -34,8 +34,6 @@ class DetailViewController: UIViewController {
         self.setAddSubViews()
         self.setLayouts()
         self.setDelegates()
-        self.setAddTargets()
-        self.setGestures()
     }
     
     func setViewFoundations() {
@@ -43,8 +41,6 @@ class DetailViewController: UIViewController {
         
         if #available(iOS 11.0, *) {
             self.navigationItem.largeTitleDisplayMode = .never
-        } else {
-            // Fallback on earlier versions
         }
     }
     
@@ -59,7 +55,6 @@ class DetailViewController: UIViewController {
         if #available(iOS 11.0, *) {
             safeAreaTopAnchor = self.view.safeAreaLayoutGuide.topAnchor
         } else {
-            // Fallback on earlier versions
             safeAreaTopAnchor = self.view.topAnchor
         }
         
@@ -75,14 +70,6 @@ class DetailViewController: UIViewController {
     func setDelegates() {
         self.detailTableView.delegate = self
         self.detailTableView.dataSource = self
-    }
-    
-    func setAddTargets() {
-        
-    }
-    
-    func setGestures() {
-        
     }
 }
 

@@ -82,9 +82,6 @@ class MainTableViewCell: UITableViewCell {
         self.setViewFoundations()
         self.setAddSubViews()
         self.setLayouts()
-        self.setDelegates()
-        self.setAddTargets()
-        self.setGestures()
     }
     
     required init?(coder: NSCoder) {
@@ -163,17 +160,5 @@ class MainTableViewCell: UITableViewCell {
             self.ratingView.trailingAnchor.constraint(equalTo: self.contentsAreaView.trailingAnchor, constant: -8),
             self.ratingView.topAnchor.constraint(equalTo: self.genrelabel.topAnchor)
         ])
-    }
-    
-    func setDelegates() {
-        
-    }
-    
-    func setAddTargets() {
-        
-    }
-    
-    func setGestures() {
-        
     }
 }

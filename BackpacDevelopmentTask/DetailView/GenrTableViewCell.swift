@@ -47,8 +47,8 @@ class GenrTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         self.setViewFoundations()
-//        self.setAddSubViews()
-//        self.setLayouts()
+        self.setAddSubViews()
+        self.setLayouts()
         self.setDelegates()
         self.setAddTargets()
         self.setGestures()
@@ -114,25 +114,40 @@ class GenrTableViewCell: UITableViewCell {
         }
         
         self.genrScrollView.contentSize = CGSize(width: self.contentView.frame.width * CGFloat(genrs.count),
-                                                height: self.genrScrollView.frame.height)
+                                                 height: self.genrScrollView.frame.height)
         var xPosition: CGFloat = 8
         for i in 0..<genrs.count {
-            let label = UILabel()
-            label.text = "#" + genrs[i]
-            label.layer.borderColor = UIColor.lightGray.cgColor
-            label.layer.borderWidth = 1
-            label.layer.cornerRadius = 5
-            label.sizeToFit()
             
-            label.frame = CGRect(x: xPosition,
-                                 y: 0,
-                                 width: label.frame.width,
-                                 height: label.frame.height)
-            xPosition += label.frame.width + 8
-            self.genrScrollView.addSubview(label)
+            let genrLabel: UILabel = {
+                let label = UILabel()
+                label.text = "#" + genrs[i]
+                return label
+            }()
+            genrLabel.sizeToFit()
+            
+            let genrView: UIView = {
+                let view = UIView()
+                view.layer.borderColor = UIColor.lightGray.cgColor
+                view.layer.borderWidth = 1
+                view.layer.cornerRadius = 5
+                return view
+            }()
+            
+            
+            genrLabel.frame = CGRect(x: 4,
+                                     y: 4,
+                                     width: genrLabel.frame.width,
+                                     height: genrLabel.frame.height)
+            
+            genrView.frame = CGRect(x: xPosition,
+                                    y: 0,
+                                    width: genrLabel.frame.width + 8,
+                                    height: genrLabel.frame.height + 8)
+            
+            xPosition += genrView.frame.width + 8
+            
+            genrView.addSubview(genrLabel)
+            self.genrScrollView.addSubview(genrView)
         }
-        
-        self.setAddSubViews()
-        self.setLayouts()
     }
 }
