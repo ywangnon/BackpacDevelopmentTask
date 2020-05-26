@@ -14,7 +14,6 @@ class DetailViewController: UIViewController {
     
     var detailTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        //        tableView.numberOfSections = 2
         tableView.bounces = false
         tableView.allowsSelection = false
         tableView.separatorStyle = .none
@@ -25,7 +24,7 @@ class DetailViewController: UIViewController {
         return tableView
     }()
     
-    var tableBottomConstraint: NSLayoutConstraint!
+//    var tableBottomConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,12 +63,12 @@ class DetailViewController: UIViewController {
             safeAreaTopAnchor = self.view.topAnchor
         }
         
-        self.tableBottomConstraint = self.detailTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+//        self.tableBottomConstraint = self.detailTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         NSLayoutConstraint.activate([
             self.detailTableView.topAnchor.constraint(equalTo: safeAreaTopAnchor),
             self.detailTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             self.detailTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            self.tableBottomConstraint
+            self.detailTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
     }
     
@@ -134,13 +133,13 @@ extension DetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
+        if indexPath.section == 0 { // 섹션이 0일떄
             let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath) as! DetailTableViewCell
             cell.setDetailInfo(self.appInfo!)
             cell.webButton.addTarget(self, action: #selector(self.webButton(_:)), for: .touchUpInside)
             cell.shareButton.addTarget(self, action: #selector(self.shareButton(_:)), for: .touchUpInside)
             return cell
-        } else {
+        } else { // 섹션이 1일때
             let cell = tableView.dequeueReusableCell(withIdentifier: "genrCell", for: indexPath) as! GenrTableViewCell
             cell.setGenr(genrs: self.appInfo?.genres)
             return cell

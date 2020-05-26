@@ -15,7 +15,7 @@ class DetailTableViewCell: UITableViewCell {
         return view
     }()
     
-    // MARK: 미리보기 이미지
+    // MARK: 미리보기 이미지 스크롤
     var imgScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.bounces = false
@@ -23,7 +23,7 @@ class DetailTableViewCell: UITableViewCell {
         return scrollView
     }()
     
-    // MARK: 기본 정보 영역
+    // MARK: 기본 정보 영역(앱 이름, 셀러, 가격, 링크)
     var defaultInfoView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -51,6 +51,7 @@ class DetailTableViewCell: UITableViewCell {
         return label
     }()
     
+    // MARK: 웹에서 보기와 공유하기 테두리
     var linkAreaView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 5
@@ -222,8 +223,8 @@ class DetailTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         self.setViewFoundations()
-//        self.setAddSubViews()
-//        self.setLayouts()
+        self.setAddSubViews()
+        self.setLayouts()
         self.setDelegates()
         self.setAddTargets()
         self.setGestures()
@@ -258,9 +259,9 @@ class DetailTableViewCell: UITableViewCell {
         ])
 
         self.linkAreaView.addSubviews([
-            self.linkAreaCenterLineView,
             self.webButton,
-            self.shareButton
+            self.shareButton,
+            self.linkAreaCenterLineView
         ])
 
         self.additionalInfoAreaView.addSubviews([
@@ -305,8 +306,6 @@ class DetailTableViewCell: UITableViewCell {
             self.imgScrollView.widthAnchor.constraint(equalTo: self.defaultView.widthAnchor),
             self.imgScrollView.heightAnchor.constraint(equalToConstant: self.contentView.frame.width)
         ])
-        print("DefaultView Size", self.defaultView.frame)
-        print("ContentView Size", self.contentView.frame)
         
         NSLayoutConstraint.activate([
             self.defaultInfoView.topAnchor.constraint(equalTo: self.imgScrollView.bottomAnchor),
@@ -344,7 +343,8 @@ class DetailTableViewCell: UITableViewCell {
             self.linkAreaCenterLineView.widthAnchor.constraint(equalToConstant: 1),
             self.linkAreaCenterLineView.leadingAnchor.constraint(equalTo: self.webButton.trailingAnchor),
             self.linkAreaCenterLineView.trailingAnchor.constraint(equalTo: self.shareButton.leadingAnchor),
-            self.linkAreaCenterLineView.heightAnchor.constraint(equalTo: self.linkAreaView.heightAnchor)
+            self.linkAreaCenterLineView.heightAnchor.constraint(equalTo: self.linkAreaView.heightAnchor),
+            self.linkAreaCenterLineView.centerYAnchor.constraint(equalTo: self.linkAreaView.centerYAnchor)
         ])
         
         NSLayoutConstraint.activate([
@@ -524,8 +524,6 @@ class DetailTableViewCell: UITableViewCell {
             }
         }
         
-        self.setAddSubViews()
-        self.setLayouts()
     }
     
     /// 앱 정보를 가지고 elements들을 설정한다.
@@ -534,29 +532,43 @@ class DetailTableViewCell: UITableViewCell {
         self.setImage(urlStrings: info.screenshotUrls)
         self.appNameLabel.text = info.trackName
         self.sellerLabel.text = info.sellerName
-        self.priceLabel.text = info.formattedPrice // == nil ? "무료" : info.formattedPrice! + " 원"
         self.sizeLabel.text = CommonFunctions.shared.convertByteToMB(info.fileSizeBytes) ?? "0" + "MB"
         self.ageLabel.text = info.contentAdvisoryRating
         self.releaseNotesLabel.text = info.version
         self.releaseNotesDescriptionLabel.text = info.releaseNotes
         self.appDescriptionLabel.text = info.description
+        if var price = info.formattedPrice,
+            price != "무료" {
+            price.removeFirst()
+            let titleString = NSAttributedString(string: price, attributes: [.font : UIFont.systemFont(ofSize: 20, weight: .bold)])
+            let bodyString = NSAttributedString(string: "원", attributes: [.font : UIFont.systemFont(ofSize: 12)])
+            let attrString = NSMutableAttributedString()
+            attrString.append(titleString)
+            attrString.append(bodyString)
+            self.priceLabel.attributedText = attrString
+        } else {
+            self.priceLabel.text = info.formattedPrice
+        }
     }
 }
 
+// MARK: - 
 extension DetailTableViewCell {
+    /// 새로운 기능에 대한 공지를 보여주는지 여부
+    /// - Parameter active: true: 새로운 기능 보여줌, false: 새로운 기능 닫음
     func isActiveReleaseNote(_ active: Bool) {
         if active {
             self.releaseNotesImageView.image = UIImage(named: "UpArrow")
             if let labelHeight = self.descriptionLabelHeight {
+                self.releaseNotesDescriptionLabel.isHidden = false
                 NSLayoutConstraint.deactivate([labelHeight])
             }
-            self.releaseNotesDescriptionLabel.isHidden = false
         } else {
             self.releaseNotesImageView.image = UIImage(named: "DownArrow")
             if let labelHeight = self.descriptionLabelHeight {
+                self.releaseNotesDescriptionLabel.isHidden = true
                 NSLayoutConstraint.activate([labelHeight])
             }
-            self.releaseNotesDescriptionLabel.isHidden = true
         }
         self.layoutIfNeeded()
     }
@@ -568,7 +580,6 @@ extension DetailTableViewCell {
         sender.isSelected = !sender.isSelected
         self.isActiveReleaseNote(sender.isSelected)
     }
-    
 }
 
 extension DetailTableViewCell: UIScrollViewDelegate {

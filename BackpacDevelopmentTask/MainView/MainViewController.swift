@@ -25,39 +25,28 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
-        self.getData()
+        DispatchQueue.global(qos: .background).async {
+            DataFetch.shared.getData { (appInfo) in
+                self.searchedData = appInfo
+                DispatchQueue.main.async {
+                    self.mainTableView.reloadData()
+                }
+            }
+        }
+        
         self.setViewFoundations()
         self.setAddSubViews()
         self.setLayouts()
         self.setDelegates()
-        self.setAddTargets()
-        self.setGestures()
         self.setOtherProperties()
     }
     
     func setViewFoundations() {
         self.title = self.searchedWord
+        
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.prefersLargeTitles = true
-        } else {
-            let label = UILabel()
-
-            label.translatesAutoresizingMaskIntoConstraints = false
-
-            label.text = self.searchedWord
-            label.font = .systemFont(ofSize: 20, weight: .bold)
-//            label.backgroundColor = .green
-
-            label.textAlignment = .left
-
-            navigationItem.titleView = label
-
-            if let navigationBar = navigationController?.navigationBar {
-
-                label.widthAnchor.constraint(equalTo: navigationBar.widthAnchor, constant: -40).isActive = true
-            }
         }
     }
     
@@ -72,7 +61,6 @@ class MainViewController: UIViewController {
         if #available(iOS 11.0, *) {
             safeAreaTopAnchor = self.view.safeAreaLayoutGuide.topAnchor
         } else {
-            // Fallback on earlier versions
             safeAreaTopAnchor = self.view.topAnchor
         }
         
@@ -89,52 +77,8 @@ class MainViewController: UIViewController {
         self.mainTableView.dataSource = self
     }
     
-    func setAddTargets() {
-        
-    }
-    
-    func setGestures() {
-        
-    }
-    
     func setOtherProperties() {
         self.mainTableView.separatorStyle = .none
-    }
-}
-
-// MARK: - 통신 관련 함수
-extension MainViewController {
-    /// api에서 데이터를 읽어들인다.
-    func getData() {
-        let urlStr = "https://itunes.apple.com/search?term=" + self.searchedWord + "&country=kr&media=software"
-        
-        if let encoded  = urlStr.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed),
-            let myURL = URL(string: encoded){
-            AF.request(myURL)
-                .validate(statusCode: 200..<300)
-                .responseData { response in
-                    switch response.result {
-                    case .success:
-                        do {
-                            let decoder = JSONDecoder()
-                            if let data = response.data {
-                                let decodedData = try decoder.decode(ItunesAppInfo.self, from: data)
-                                self.searchedData = decodedData
-                                
-                                DispatchQueue.main.async {
-                                    self.mainTableView.reloadData()
-                                }
-                            } else {
-                                print("No Data")
-                            }
-                        } catch let error {
-                            print("Error:::", error.localizedDescription)
-                        }
-                    case let .failure(error):
-                        print(error)
-                    }
-            }
-        }
     }
 }
 

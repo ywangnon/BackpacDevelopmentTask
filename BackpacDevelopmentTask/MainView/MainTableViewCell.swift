@@ -10,7 +10,7 @@ import UIKit
 import Cosmos
 
 class MainTableViewCell: UITableViewCell {
-    var realContentsView: UIView = {
+    var contentsAreaView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         view.layer.cornerRadius = 5
@@ -60,6 +60,7 @@ class MainTableViewCell: UITableViewCell {
     
     var ratingView: CosmosView = {
         let cosmosView = CosmosView()
+        cosmosView.isUserInteractionEnabled = false
         cosmosView.translatesAutoresizingMaskIntoConstraints = false
         return cosmosView
     }()
@@ -96,10 +97,10 @@ class MainTableViewCell: UITableViewCell {
     
     func setAddSubViews() {
         self.contentView.addSubviews([
-            self.realContentsView
+            self.contentsAreaView
         ])
         
-        self.realContentsView.addSubviews([
+        self.contentsAreaView.addSubviews([
             self.titleImageView,
             self.appNameLabel,
             self.sellerNameLabel,
@@ -112,34 +113,36 @@ class MainTableViewCell: UITableViewCell {
     
     func setLayouts() {
         NSLayoutConstraint.activate([
-            self.realContentsView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 8),
-            self.realContentsView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8),
-            self.realContentsView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
-            self.realContentsView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8)
+            self.contentsAreaView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 8),
+            self.contentsAreaView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8),
+            self.contentsAreaView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
+            self.contentsAreaView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8)
         ])
         
         NSLayoutConstraint.activate([
-            self.titleImageView.topAnchor.constraint(equalTo: self.realContentsView.topAnchor),
-            self.titleImageView.leadingAnchor.constraint(equalTo: self.realContentsView.leadingAnchor),
-            self.titleImageView.trailingAnchor.constraint(equalTo: self.realContentsView.trailingAnchor),
+            self.titleImageView.topAnchor.constraint(equalTo: self.contentsAreaView.topAnchor),
+            self.titleImageView.leadingAnchor.constraint(equalTo: self.contentsAreaView.leadingAnchor),
+            self.titleImageView.trailingAnchor.constraint(equalTo: self.contentsAreaView.trailingAnchor),
             self.titleImageView.heightAnchor.constraint(equalTo: self.titleImageView.widthAnchor)
         ])
         
         NSLayoutConstraint.activate([
             self.appNameLabel.topAnchor.constraint(equalTo: self.titleImageView.bottomAnchor, constant: 8),
-            self.appNameLabel.leadingAnchor.constraint(equalTo: self.realContentsView.leadingAnchor, constant: 8)
+            self.appNameLabel.leadingAnchor.constraint(equalTo: self.contentsAreaView.leadingAnchor, constant: 8),
+            self.appNameLabel.widthAnchor.constraint(lessThanOrEqualTo: self.contentsAreaView.widthAnchor, multiplier: 0.5)
         ])
         self.appNameLabel.sizeToFit()
         
         NSLayoutConstraint.activate([
             self.sellerNameLabel.topAnchor.constraint(equalTo: self.appNameLabel.bottomAnchor, constant: 4),
-            self.sellerNameLabel.leadingAnchor.constraint(equalTo: self.appNameLabel.leadingAnchor)
+            self.sellerNameLabel.leadingAnchor.constraint(equalTo: self.appNameLabel.leadingAnchor),
+            self.sellerNameLabel.widthAnchor.constraint(lessThanOrEqualTo: self.contentsAreaView.widthAnchor, multiplier: 0.5)
         ])
         self.sellerNameLabel.sizeToFit()
         
         NSLayoutConstraint.activate([
-            self.lineView.leadingAnchor.constraint(equalTo: self.realContentsView.leadingAnchor),
-            self.lineView.trailingAnchor.constraint(equalTo: self.realContentsView.trailingAnchor),
+            self.lineView.leadingAnchor.constraint(equalTo: self.contentsAreaView.leadingAnchor),
+            self.lineView.trailingAnchor.constraint(equalTo: self.contentsAreaView.trailingAnchor),
             self.lineView.heightAnchor.constraint(equalToConstant: 1),
             self.lineView.topAnchor.constraint(equalTo: self.sellerNameLabel.bottomAnchor, constant: 8)
         ])
@@ -157,7 +160,7 @@ class MainTableViewCell: UITableViewCell {
         self.priceLabel.sizeToFit()
         
         NSLayoutConstraint.activate([
-            self.ratingView.trailingAnchor.constraint(equalTo: self.realContentsView.trailingAnchor, constant: -8),
+            self.ratingView.trailingAnchor.constraint(equalTo: self.contentsAreaView.trailingAnchor, constant: -8),
             self.ratingView.topAnchor.constraint(equalTo: self.genrelabel.topAnchor)
         ])
     }
