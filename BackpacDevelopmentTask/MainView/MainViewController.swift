@@ -10,8 +10,6 @@ import UIKit
 import Alamofire
 
 class MainViewController: UIViewController {
-    /// 검색한 키워드
-    let searchedWord: String = "핸드메이드"
     /// 검색된 데이터
     var searchedData: ItunesAppInfo?
     
@@ -43,7 +41,7 @@ class MainViewController: UIViewController {
     }
     
     func setViewFoundations() {
-        self.title = self.searchedWord
+        self.title = CommonValue.wordToSearch
         
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.prefersLargeTitles = true

@@ -16,12 +16,14 @@ class DataFetch {
 extension DataFetch {
     /// api에서 데이터를 읽어들인다.
     func getData(_ success: ((ItunesAppInfo) -> Void)? = nil ) {
-        let urlStr = "https://itunes.apple.com/search?term=핸드메이드&country=kr&media=software"
+        // MARK: 잘못된 주소 TestURL
+//        let urlStr = "가나다라마바사"
+//        let urlStr = "www.naver.com"
+        let urlStr = "https://itunes.apple.com/search?term=" + CommonValue.wordToSearch + "&country=kr&media=software"
         
         if let encoded  = urlStr.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed),
             let myURL = URL(string: encoded) {
             AF.request(myURL)
-                .validate(statusCode: 200..<300)
                 .responseData { response in
                     switch response.result {
                     case .success:
@@ -36,12 +38,16 @@ extension DataFetch {
                                 print("No Data")
                             }
                         } catch let error {
-                            print("Error:::", error.localizedDescription)
+                            print("Do Catch Error:::", error.localizedDescription)
                         }
                     case let .failure(error):
-                        print("Error:::", error.localizedDescription)
+                        print("Failure Error:::", error.localizedDescription)
                     }
             }
+        } else {
+            CommonFunctions.shared.showAlert(controller: (UIApplication.shared.keyWindow?.rootViewController)!,
+                                             title: "잘못된 URL", message: "잘못된 URL을 입력하였습니다.",
+                                             alertStyle: .alert)
         }
     }
 }

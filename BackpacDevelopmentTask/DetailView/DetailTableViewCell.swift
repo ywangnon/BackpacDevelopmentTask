@@ -91,6 +91,7 @@ class DetailTableViewCell: UITableViewCell {
         return view
     }()
     
+    // MARK: 크기
     var sizeView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -117,6 +118,7 @@ class DetailTableViewCell: UITableViewCell {
         return label
     }()
     
+    // MARK: 연령
     var ageView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -143,6 +145,7 @@ class DetailTableViewCell: UITableViewCell {
         return label
     }()
     
+    // MARK: 새로운 기능
     var releaseNotesView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -197,7 +200,7 @@ class DetailTableViewCell: UITableViewCell {
         return label
     }()
     
-    // MARK: 설명
+    // MARK: 앱 설명
     var appDescriptionLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 10
@@ -302,7 +305,7 @@ class DetailTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             self.imgScrollView.topAnchor.constraint(equalTo: self.defaultView.topAnchor),
             self.imgScrollView.leadingAnchor.constraint(equalTo: self.defaultView.leadingAnchor),
-            self.imgScrollView.widthAnchor.constraint(equalTo: self.defaultView.widthAnchor),
+            self.imgScrollView.trailingAnchor.constraint(equalTo: self.defaultView.trailingAnchor),
             self.imgScrollView.heightAnchor.constraint(equalToConstant: self.contentView.frame.width)
         ])
         
@@ -559,17 +562,17 @@ extension DetailTableViewCell {
     /// - Parameter active: true: 새로운 기능 보여줌, false: 새로운 기능 닫음
     func isActiveReleaseNote(_ active: Bool) {
         if active {
-            self.releaseNotesImageView.image = UIImage(named: "UpArrow")
             if let labelHeight = self.descriptionLabelHeight {
-                self.releaseNotesDescriptionLabel.isHidden = false
                 NSLayoutConstraint.deactivate([labelHeight])
             }
+            self.releaseNotesImageView.image = UIImage(named: "UpArrow")
+            self.releaseNotesDescriptionLabel.isHidden = false
         } else {
-            self.releaseNotesImageView.image = UIImage(named: "DownArrow")
             if let labelHeight = self.descriptionLabelHeight {
-                self.releaseNotesDescriptionLabel.isHidden = true
                 NSLayoutConstraint.activate([labelHeight])
             }
+            self.releaseNotesImageView.image = UIImage(named: "DownArrow")
+            self.releaseNotesDescriptionLabel.isHidden = true
         }
         self.layoutIfNeeded()
     }

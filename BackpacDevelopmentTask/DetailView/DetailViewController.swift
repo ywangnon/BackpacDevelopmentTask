@@ -24,12 +24,9 @@ class DetailViewController: UIViewController {
         return tableView
     }()
     
-//    var tableBottomConstraint: NSLayoutConstraint!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
         self.setViewFoundations()
         self.setAddSubViews()
         self.setLayouts()
@@ -58,7 +55,6 @@ class DetailViewController: UIViewController {
             safeAreaTopAnchor = self.view.topAnchor
         }
         
-//        self.tableBottomConstraint = self.detailTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         NSLayoutConstraint.activate([
             self.detailTableView.topAnchor.constraint(equalTo: safeAreaTopAnchor),
             self.detailTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
