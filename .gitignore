@@ -1,0 +1,4 @@
+### BackpacDevelopmentTask Ignore File ###
+
+.Podfile
+*.lock
