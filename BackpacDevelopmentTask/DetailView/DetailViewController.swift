@@ -71,6 +71,7 @@ class DetailViewController: UIViewController {
 
 // MARK: - 버튼 액션
 extension DetailViewController {
+    /// 앱스토어 링크로 넘어간다.
     @objc func webButton(_ sender: UIButton) {
         if let url = self.appInfo?.trackViewURL,
             let appStoreURL = URL(string: url),
@@ -79,6 +80,7 @@ extension DetailViewController {
         }
     }
     
+    /// 공유 기능을 제공한다.
     @objc func shareButton(_ sender: UIButton) {
         guard let url = self.appInfo?.trackViewURL else { return }
         let activityVC = UIActivityViewController(activityItems: [url],

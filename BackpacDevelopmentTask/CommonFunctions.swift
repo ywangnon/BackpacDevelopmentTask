@@ -64,10 +64,10 @@ extension CommonFunctions {
     }
     
     /// 기본적인 경고창을 생성한다.
-    func showAlert(controller: UIViewController, title: String, message : String, alertStyle: UIAlertController.Style) {
+    func showAlert(controller: UIViewController?, title: String, message : String, alertStyle: UIAlertController.Style) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: alertStyle)
         let alertAction = UIAlertAction(title: "확인", style: .cancel, handler: nil)
         alert.addAction(alertAction)
-        controller.present(alert, animated: true)
+        controller?.present(alert, animated: true)
     }
 }

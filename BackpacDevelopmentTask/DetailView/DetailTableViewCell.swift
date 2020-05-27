@@ -559,7 +559,9 @@ class DetailTableViewCell: UITableViewCell {
 // MARK: - 
 extension DetailTableViewCell {
     /// 새로운 기능에 대한 공지를 보여주는지 여부
-    /// - Parameter active: true: 새로운 기능 보여줌, false: 새로운 기능 닫음
+    ///
+    /// true: 새로운 기능 설명란이 펼쳐짐
+    /// false: 새로운 기능 설명란이 닫혀짐
     func isActiveReleaseNote(_ active: Bool) {
         if active {
             if let labelHeight = self.descriptionLabelHeight {

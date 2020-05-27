@@ -9,8 +9,13 @@
 import Foundation
 
 class CommonValue {
-    // MARK: Test
-    // - 게임, 음악, 음식
-    // 먼ㄹ이ㅏ;ㅁ노러ㅣㅏ미
+    /**
+     입력값
+     기본
+      - 핸드메이드
+     테스트
+      - 게임, 음악, 음식
+      - 먼ㄹ이ㅏ;ㅁ노러ㅣㅏ미
+     */
     static let wordToSearch = "핸드메이드"
 }

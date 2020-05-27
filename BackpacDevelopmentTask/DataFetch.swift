@@ -45,7 +45,7 @@ extension DataFetch {
                     }
             }
         } else {
-            CommonFunctions.shared.showAlert(controller: (UIApplication.shared.keyWindow?.rootViewController)!,
+            CommonFunctions.shared.showAlert(controller: CommonFunctions.shared.getTopVC(UIApplication.shared.keyWindow?.rootViewController),
                                              title: "잘못된 URL", message: "잘못된 URL을 입력하였습니다.",
                                              alertStyle: .alert)
         }

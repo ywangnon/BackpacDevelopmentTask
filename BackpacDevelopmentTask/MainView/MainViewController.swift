@@ -30,6 +30,7 @@ class MainViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.mainTableView.reloadData()
                 }
+                self.checkNoData(self.searchedData?.resultCount)
             }
         }
         
@@ -77,6 +78,19 @@ class MainViewController: UIViewController {
     
     func setOtherProperties() {
         self.mainTableView.separatorStyle = .none
+    }
+}
+
+// MARK: - 기능
+extension MainViewController {
+    /// 데이터가 없을 경우 alert을 띄워준다.
+    func checkNoData(_ count: Int?) {
+        if let count = count,
+            count == 0 {
+            CommonFunctions.shared.showAlert(controller: self,
+                                             title: "", message: "찾으시는 데이터가 없습니다.",
+                                             alertStyle: .alert)
+        }
     }
 }
 
