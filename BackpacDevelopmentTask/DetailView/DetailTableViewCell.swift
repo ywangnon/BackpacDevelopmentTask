@@ -576,7 +576,7 @@ extension DetailTableViewCell {
             self.releaseNotesImageView.image = UIImage(named: "DownArrow")
             self.releaseNotesDescriptionLabel.isHidden = true
         }
-        self.layoutIfNeeded()
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "releaseNoti"), object: nil)
     }
 }
 

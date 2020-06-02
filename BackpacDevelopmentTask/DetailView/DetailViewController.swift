@@ -31,6 +31,7 @@ class DetailViewController: UIViewController {
         self.setAddSubViews()
         self.setLayouts()
         self.setDelegates()
+        self.setNotification()
     }
     
     func setViewFoundations() {
@@ -63,6 +64,10 @@ class DetailViewController: UIViewController {
         ])
     }
     
+    func setNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.releaseNoti(_:)), name: Notification.Name(rawValue: "releaseNoti"), object: nil)
+    }
+    
     func setDelegates() {
         self.detailTableView.delegate = self
         self.detailTableView.dataSource = self
@@ -87,6 +92,12 @@ extension DetailViewController {
                                                   applicationActivities: nil)
         activityVC.popoverPresentationController?.sourceView = self.view
         self.present(activityVC, animated: true, completion: nil)
+    }
+    
+    @objc func releaseNoti(_ notification: Notification) {
+        DispatchQueue.main.async {
+            self.detailTableView.reloadData()
+        }
     }
 }
 
