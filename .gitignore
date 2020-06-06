@@ -1,4 +1,3 @@
 ### BackpacDevelopmentTask Ignore File ###
 
-.Podfile
-*.lock
+.DS_Store
