@@ -509,7 +509,7 @@ class DetailTableViewCell: UITableViewCell {
         // 이미지 비율이 4:7, 간단하게 2배로 함.
         let imgViewSize = CGSize(width: self.contentView.frame.width * 0.5,
                                  height: self.contentView.frame.width)
-        print("imgView Size:::", imgViewSize)
+        
         self.imgScrollView.contentSize = CGSize(width: (5 + imgViewSize.width) * CGFloat(urls.count) + 5,
                                                 height: imgViewSize.height)
         for i in 0..<urls.count {
