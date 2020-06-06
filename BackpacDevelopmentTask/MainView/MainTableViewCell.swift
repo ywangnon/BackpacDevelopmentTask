@@ -126,7 +126,7 @@ class MainTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             self.appNameLabel.topAnchor.constraint(equalTo: self.titleImageView.bottomAnchor, constant: 8),
             self.appNameLabel.leadingAnchor.constraint(equalTo: self.contentsAreaView.leadingAnchor, constant: 8),
-            self.appNameLabel.widthAnchor.constraint(lessThanOrEqualTo: self.contentsAreaView.widthAnchor, multiplier: 0.5)
+            self.appNameLabel.trailingAnchor.constraint(equalTo: self.contentsAreaView.trailingAnchor, constant: -8)
         ])
         self.appNameLabel.sizeToFit()
         

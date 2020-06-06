@@ -19,6 +19,7 @@ class DetailTableViewCell: UITableViewCell {
     var imgScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.bounces = false
+        scrollView.showsVerticalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
@@ -506,6 +507,11 @@ class DetailTableViewCell: UITableViewCell {
         guard let urls = urlStrings else {
             return
         }
+        
+        guard self.imgScrollView.subviews.count == 0 else {
+            return
+        }
+        
         // 이미지 비율이 4:7, 간단하게 2배로 함.
         let imgViewSize = CGSize(width: self.contentView.frame.width * 0.5,
                                  height: self.contentView.frame.width)
